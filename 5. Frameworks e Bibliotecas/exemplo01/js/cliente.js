@@ -26,11 +26,10 @@ async function cadastrarUsuario() {
         usuario.cpf = getById('cpf').value;
         usuario.email = getById('email').value;
         usuario.senha = getById('senha').value;
-        usuario.telefone = getById('telefone').value;
         usuario.cep = getById('cep').value;
         usuario.logradouro = getById('logradouro').value;
         usuario.complemento = getById('complemento').value;
-        usuario.tipo = 'CLIENTE';
+        
 
         const resp = await fetch(`http://localhost:8080/usuarios`, { 
             method: 'POST',
