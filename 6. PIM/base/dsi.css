@@ -43,7 +43,7 @@ label {
     display: inline-block;
 }
 
-input:not([type='checkbox']):not([type='submit']), select, textarea {
+input:not([type='checkbox']):not([type='submit']):not([type='radio']), select, textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #CCCCCC;
@@ -61,6 +61,7 @@ input[type='submit'], button {
     border-radius: 4px;
     cursor: pointer;
     margin-top: 6px;
+    text-transform: uppercase;
 }
 
 input[type='submit']:hover, button:hover {
@@ -76,6 +77,12 @@ input[type='submit']:hover, button:hover {
 
 .center {
     text-align: center;
-}
 
 /* Fim: Estilos Extras (utilitários, labels, inputs etc) */
+}
+
+/* Links Úteis:
+ *
+ * + Customizar Estilo Input Radio: https://stackoverflow.com/a/34854325/3072570;
+ *
+ */
