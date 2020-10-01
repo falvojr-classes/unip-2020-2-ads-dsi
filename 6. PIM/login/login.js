@@ -20,7 +20,9 @@ async function logar() {
       let tokenBasic = gerarTokenBasicAuth(usuario.email, usuario.senha);
       salvarLocalmente('token', tokenBasic);
 
-      redirecionarSemHistorico('../home/home.html');
+      let ehPf = usuarioLogado.tipo == 'PF';
+      redirecionarSemHistorico(`../home/home${ehPf ? '' : '-adm'}.html`);
+
     } else {
       const erro = await response.json();
       alert(erro.mensagem);
