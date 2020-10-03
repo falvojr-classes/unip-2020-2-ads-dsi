@@ -2,6 +2,10 @@ function getById(id) {
   return document.getElementById(id);
 }
 
+function criarElemento(tag) {
+  return document.createElement(tag);
+}
+
 function redirecionar(pagina) {
   // https://stackoverflow.com/a/1655081/3072570
   location.href = pagina;

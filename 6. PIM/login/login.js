@@ -5,7 +5,7 @@ async function logar() {
     usuario.senha = getById('senha').value;
 
     // Consome a API (rodando localmente) para a inclusão do Usuário/Cliente
-    const response = await fetch('http://localhost:8080/api/login', {
+    const response = await fetch('http://127.0.0.1:8080/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(usuario)
@@ -20,8 +20,8 @@ async function logar() {
       let tokenBasic = gerarTokenBasicAuth(usuario.email, usuario.senha);
       salvarLocalmente('token', tokenBasic);
 
-      let ehPf = usuarioLogado.tipo == 'PF';
-      redirecionarSemHistorico(`../home/home${ehPf ? '' : '-adm'}.html`);
+      let ehAdm = usuarioLogado.tipo == 'ADM';
+      redirecionarSemHistorico(`../home/home${ehAdm ? '-adm' : ''}.html`);
 
     } else {
       const erro = await response.json();
