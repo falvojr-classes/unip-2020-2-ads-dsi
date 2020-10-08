@@ -1,3 +1,6 @@
+const KEY_USUARIO = 'usuario';
+const KEY_TOKEN = 'token';
+
 function getById(id) {
   return document.getElementById(id);
 }

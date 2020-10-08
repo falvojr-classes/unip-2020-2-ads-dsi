@@ -8,24 +8,34 @@
   <link rel="stylesheet" type="text/css" href="../base/dsi.css" />
 </head>
 
-<body onload="inicializar()">
+<body onload="buscarUsuarios()">
   <div class="row">
-    <!-- 25% à esquerda -->
-    <div class="col-3"></div>
+    <div class="col-2"></div>
 
-    <!-- 50% para o formulário -->
-    <div class="col-6">
+    <div class="col-8">
       <h2 id="saudacao" class="center"></h2>
       <h1 class="center">Home Interna</h1>
+
+      <div id="cabecalho" class="row">
+        <div class="col-1"><strong>ID</strong></div>
+        <div class="col-3"><strong>Nome</strong></div>
+        <div class="col-2"><strong>Documento</strong></div>
+        <div class="col-3"><strong>Email</strong></div>
+        <div class="col-1"><strong>Tipo</strong></div>
+        <div class="col-2"><strong>Ações</strong></div>
+      </div>
+
+      <div id="gridUsuarios" >
+        <!-- Linhas inseridas dinamicamente... -->
+      </div>
     </div>
 
-    <!-- 25% à direita -->
-    <div class="col-3"></div>
+    <div class="col-2"></div>
   </div>
 
   <!-- Levando em conta boas práticas e performance, estamos importando nossos scripts no fim do Body -->
   <script src="../base/dsi.js"></script>
-  <script src="home.js"></script>
+  <script src="home-adm.js"></script>
 </body>
 
 </html>

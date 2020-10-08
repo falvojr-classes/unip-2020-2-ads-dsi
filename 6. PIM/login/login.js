@@ -15,10 +15,10 @@ async function logar() {
     if (response.ok) {
       const usuarioLogado = await response.json();
       
-      salvarJsonLocalmente('usuario', usuarioLogado);
+      salvarJsonLocalmente(KEY_USUARIO, usuarioLogado);
 
       let tokenBasic = gerarTokenBasicAuth(usuario.email, usuario.senha);
-      salvarLocalmente('token', tokenBasic);
+      salvarLocalmente(KEY_TOKEN, tokenBasic);
 
       let ehAdm = usuarioLogado.tipo == 'ADM';
       redirecionarSemHistorico(`../home/home${ehAdm ? '-adm' : ''}.html`);
