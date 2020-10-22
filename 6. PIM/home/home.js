@@ -32,6 +32,7 @@ async function preencherDados(usuarioRemoto) {
         getById('nome').value = usuarioLocal.nome;
         getById('email').value = usuarioLocal.email;
         getById('documento').value = usuarioLocal.documento;
+        getById('telefone').value = usuarioLocal.telefone;
         getById('radioPf').checked = usuarioLocal.tipo == 'PF';
         getById('radioPj').checked = usuarioLocal.tipo == 'PJ';
         // Buscar todos os interesses possíveis
@@ -81,6 +82,7 @@ async function salvar() {
         const radioPf = getById('radioPf');
         const radioPj = getById('radioPj');
         usuarioLocal.tipo = radioPf.checked ? radioPf.value : radioPj.value;
+        usuarioLocal.telefone = getById('telefone').value;
         // Identifica os interesses selecionados e os relaciona com o usuário logado
         usuarioLocal.interesses = []
         document.getElementsByName('interesse').forEach(checkboxInteresse => {

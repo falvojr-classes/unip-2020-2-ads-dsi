@@ -57,12 +57,13 @@ async function buscarUsuarios() {
 
 function visualizarusuario(usuario) {
     const dialog = getById('usuarioDialog');
-    getById('dialogTipo').innerHTML = usuario.tipo;
     getById('dialogNome').innerHTML = usuario.nome;
-    getById('dialogEmail').innerHTML = usuario.email;
     getById('dialogDocumento').innerHTML = usuario.documento;
+    getById('dialogTipo').innerHTML = usuario.tipo;
+    getById('dialogEmail').innerHTML = usuario.email;
+    getById('dialogTelefone').innerHTML = usuario.telefone ? usuario.telefone : 'N/A';
     const interesses = usuario.interesses.map(e => e.descricao).join(', ');
-    getById('dialogInteresses').innerHTML = interesses == '' ? 'Nenhum' : interesses;
+    getById('dialogInteresses').innerHTML = interesses ? interesses : 'N/A';
 
     const btnDesBloquear = getById('dialogBtnDesBloquear');
     const acao = usuario.bloqueado ? 'desbloquear' : 'bloquear';
