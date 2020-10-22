@@ -6,16 +6,31 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="../base/dsi.css" />
+  <link rel="stylesheet" type="text/css" href="home.css" />
 </head>
 
 <body onload="inicializar()">
+  <!-- Menu -->
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-3">
+      <ul>
+        <li><a href="./home.html">Início</a></li>
+        <li><a onclick="logoff()">Sair</a></li>
+      </ul>
+    </div>
+    <div class="col-3">
+      <h4 id="saudacao" class="right"></h4>
+    </div>
+    <div class="col-3"></div>
+  </div>
+  <!-- Conteúdo Principal -->
   <div class="row">
     <!-- 25% à esquerda -->
     <div class="col-3"></div>
 
     <!-- 50% para o formulário -->
     <div class="col-6">
-      <h2 id="saudacao" class="center"></h2>
       <h1 class="center">Home</h1>
       <div class="row">
         <div class="col-2">

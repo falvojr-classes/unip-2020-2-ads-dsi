@@ -17,10 +17,10 @@ async function logar() {
       
       salvarJsonLocalmente(KEY_USUARIO, usuarioLogado);
 
-      let tokenBasic = gerarTokenBasicAuth(usuario.email, usuario.senha);
+      const tokenBasic = gerarTokenBasicAuth(usuario.email, usuario.senha);
       salvarLocalmente(KEY_TOKEN, tokenBasic);
 
-      let ehAdm = usuarioLogado.tipo == 'ADM';
+      const ehAdm = usuarioLogado.tipo == 'ADM';
       redirecionarSemHistorico(`../home/home${ehAdm ? '-adm' : ''}.html`);
 
     } else {

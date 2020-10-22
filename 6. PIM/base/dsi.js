@@ -30,6 +30,12 @@ function buscarLocalmente(chave) {
   return localStorage.getItem(chave);
 }
 
+function removerLocalmente(...chaves) {
+  chaves.forEach(chave => {
+    localStorage.removeItem(chave);
+  });
+}
+
 // Funções uteis para salvar e recuperar objetos JSON no localStorage.
 // Referência: https://stackoverflow.com/a/2010948/3072570
 

@@ -1,4 +1,4 @@
-const usuarioLogado = buscarJsonLocalmente('usuario');
+const usuarioLogado = buscarJsonLocalmente(KEY_USUARIO);
 
 async function buscarUsuarios() {
     if (usuarioLogado) {
@@ -29,35 +29,7 @@ async function buscarUsuarios() {
                     iconeVisualizar.classList.add('icon');
                     iconeVisualizar.src = '../base/icons/view.svg';
                     iconeVisualizar.onclick = function(){
-
-                        const dialog = getById('usuarioDialog');
-                        getById('dialogTipo').innerHTML = usuario.tipo;
-                        getById('dialogNome').innerHTML = usuario.nome;
-                        getById('dialogEmail').innerHTML = usuario.email;
-                        getById('dialogDocumento').innerHTML = usuario.documento;
-                        getById('dialogInteresses').innerHTML = usuario.interesses.map(e => e.descricao).join(", ");
-                        
-                        const btnDesBloquear = getById('dialogBtnDesBloquear');
-                        const acao = usuario.bloqueado ? 'desbloquear' : 'bloquear';
-                        btnDesBloquear.innerHTML = acao;
-                        if (usuario.bloqueado) {
-                            btnDesBloquear.classList.remove('warning');
-                        } else {
-                            btnDesBloquear.classList.add('warning');
-                        }
-                        btnDesBloquear.onclick = function(){
-                            const confirmou = confirm(`Deseja ${acao} o usuário ${usuario.nome}?`);
-                            if (confirmou) {
-                                bloquearUsuario(usuario);
-                            }
-                            dialog.close();
-                        };
-
-                        getById('dialogBtnFechar').onclick = function(){
-                            dialog.close();
-                        }
-
-                        dialog.showModal();
+                        visualizarusuario(usuario);
                     };
                     acoes.appendChild(iconeVisualizar);
 
@@ -81,6 +53,38 @@ async function buscarUsuarios() {
     } else {
         redirecionarSemHistorico('../login/login.html');
     }
+}
+
+function visualizarusuario(usuario) {
+    const dialog = getById('usuarioDialog');
+    getById('dialogTipo').innerHTML = usuario.tipo;
+    getById('dialogNome').innerHTML = usuario.nome;
+    getById('dialogEmail').innerHTML = usuario.email;
+    getById('dialogDocumento').innerHTML = usuario.documento;
+    const interesses = usuario.interesses.map(e => e.descricao).join(', ');
+    getById('dialogInteresses').innerHTML = interesses == '' ? 'Nenhum' : interesses;
+
+    const btnDesBloquear = getById('dialogBtnDesBloquear');
+    const acao = usuario.bloqueado ? 'desbloquear' : 'bloquear';
+    btnDesBloquear.innerHTML = acao;
+    if (usuario.bloqueado) {
+        btnDesBloquear.classList.remove('warning');
+    } else {
+        btnDesBloquear.classList.add('warning');
+    }
+    btnDesBloquear.onclick = function () {
+        const confirmou = confirm(`Deseja ${acao} o usuário ${usuario.nome}?`);
+        if (confirmou) {
+            bloquearUsuario(usuario);
+        }
+        dialog.close();
+    };
+
+    getById('dialogBtnFechar').onclick = function () {
+        dialog.close();
+    };
+
+    dialog.showModal();
 }
 
 async function bloquearUsuario(usuario) {
@@ -115,4 +119,9 @@ function criarElementoComClasse(tag, text, ...cssClasses) {
         }
     })
     return elemento;
+}
+
+function logoff() {
+    removerLocalmente(KEY_USUARIO, KEY_TOKEN);
+    redirecionarSemHistorico('../login/login.html');
 }
