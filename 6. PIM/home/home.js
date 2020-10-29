@@ -36,37 +36,7 @@ async function preencherDados(usuarioRemoto) {
         getById('radioPf').checked = usuarioLocal.tipo == 'PF';
         getById('radioPj').checked = usuarioLocal.tipo == 'PJ';
         // Buscar todos os interesses possíveis
-        const response = await fetch('http://127.0.0.1:8080/api/interesses', {
-            method: 'GET',
-            headers: { 'Authorization': buscarLocalmente(KEY_TOKEN) }
-        });
-        if (response.ok) {
-            // Recupera o container (div) destinado aos interesses, deixando-o vazio.
-            const divInteresses = getById('interesses');
-            divInteresses.innerHTML = '';
-
-            // Recupera do response a lista de interesses (array de JSON)
-            const interesses = await response.json();
-            interesses.forEach(interesse => {
-                // Cria um checkbox dinamicamente
-                const checkbox = criarElemento('input');
-                checkbox.id = interesse.descricao;
-                checkbox.name = 'interesse';
-                checkbox.type = 'checkbox';
-                checkbox.value = interesse.id;
-                checkbox.checked = usuarioLocal.interesses.some(item => item['id'] === interesse.id);
-                // Cria uma label dinamicamente
-                const label = criarElemento('label');
-                label.htmlFor = checkbox.id;
-                label.innerHTML = interesse.descricao;
-                // Inclui os elementos no container (div) destinado aos interesses.
-                divInteresses.appendChild(checkbox);
-                divInteresses.appendChild(label);
-            });
-        } else {
-            const erro = await response.json();
-            alert(erro.mensagem);
-        }
+        await criarInteresses('interesses', usuarioLocal);
     } catch (error) {
         console.log(error);
         alert('Ocorreu um erro inesperado!');

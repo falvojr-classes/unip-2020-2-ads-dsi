@@ -54,3 +54,40 @@ function gerarTokenBasicAuth(email, senha) {
   let hashBase64 = btoa(`${email}:${senha}`);
   return `Basic ${hashBase64}`;
 }
+
+// Função comum às telas de Home (PF e PJ) e Relatórios.
+async function criarInteresses(idContainer, usuarioLocal) {
+  const response = await fetch('http://127.0.0.1:8080/api/interesses', {
+      method: 'GET',
+      headers: { 'Authorization': buscarLocalmente(KEY_TOKEN) }
+  });
+  if (response.ok) {
+      // Recupera o container (div) destinado aos interesses, deixando-o vazio.
+      const divInteresses = getById(idContainer);
+      divInteresses.innerHTML = '';
+
+      // Recupera do response a lista de interesses (array de JSON)
+      const interesses = await response.json();
+      interesses.forEach(interesse => {
+          // Cria um checkbox dinamicamente
+          const checkbox = criarElemento('input');
+          checkbox.id = interesse.descricao;
+          checkbox.name = 'interesse';
+          checkbox.type = 'checkbox';
+          checkbox.value = interesse.id;
+          if (usuarioLocal) {
+              checkbox.checked = usuarioLocal.interesses.some(item => item['id'] === interesse.id);
+          }
+          // Cria uma label dinamicamente
+          const label = criarElemento('label');
+          label.htmlFor = checkbox.id;
+          label.innerHTML = interesse.descricao;
+          // Inclui os elementos no container (div) destinado aos interesses.
+          divInteresses.appendChild(checkbox);
+          divInteresses.appendChild(label);
+      });
+  } else {
+      const erro = await response.json();
+      alert(erro.mensagem);
+  }
+}
