@@ -18,8 +18,7 @@ async function relatorioTodosUsuarios() {
     if (response.ok) {
         await downloadFile(response, "usuarios.csv");
     } else {
-        const erro = await response.json();
-        alert(erro.mensagem);
+        await mostrarErro(response);
     }
 }
 
@@ -38,8 +37,7 @@ async function relatorioUsuariosPorInteresses() {
     if (response.ok) {
         await downloadFile(response, "usuariosInteresses.csv");
     } else {
-        const erro = await response.json();
-        alert(erro.mensagem);
+        await mostrarErro(response);
     }
 }
 

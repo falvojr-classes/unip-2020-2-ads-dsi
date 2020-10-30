@@ -24,8 +24,7 @@ async function logar() {
       redirecionarSemHistorico(`../home/home${ehAdm ? '-adm' : ''}.html`);
 
     } else {
-      const erro = await response.json();
-      alert(erro.mensagem);
+      await mostrarErro(response);
     }
   } catch (error) {
     console.log(error);

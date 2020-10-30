@@ -24,8 +24,7 @@ async function registrar() {
       alert(`Cliente ${cliente.nome} regitrado com sucesso!`);
       redirecionarSemHistorico('../login/login.html')
     } else {
-      const erro = await response.json();
-      alert(erro.mensagem);
+      await mostrarErro(response);
     }
   } catch (error) {
     console.log(error);

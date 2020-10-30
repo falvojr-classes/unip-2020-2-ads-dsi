@@ -42,8 +42,7 @@ async function buscarUsuarios() {
                     gridUsuarios.appendChild(linha);
                 }
             } else {
-                const erro = await response.json();
-                alert(erro.mensagem);
+                await mostrarErro(response);
             }
         } catch (error) {
             console.log(error);
@@ -91,7 +90,7 @@ function visualizarusuario(usuario) {
 async function bloquearUsuario(usuario) {
     try {
         const response = await fetch(`http://127.0.0.1:8080/api/usuarios/${usuario.id}`, {
-            method: 'DELETE',
+            method: 'PATCH',
             headers: { 'Authorization': buscarLocalmente(KEY_TOKEN) }
         });
 
@@ -99,8 +98,7 @@ async function bloquearUsuario(usuario) {
             alert(`Usuario ${usuario.bloqueado ? 'des' : ''}bloqueado com sucesso!`);
             buscarUsuarios();
         } else {
-            const erro = await response.json();
-            alert(erro.mensagem);
+            await mostrarErro(response);
         }
 
         } catch (error) {

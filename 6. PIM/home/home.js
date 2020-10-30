@@ -14,8 +14,7 @@ async function inicializar() {
             const usuarioRemoto = await response.json();
             await preencherDados(usuarioRemoto);
         } else {
-            const erro = await response.json();
-            alert(erro.mensagem);
+            await mostrarErro(response);
         }
     } else {
         redirecionarSemHistorico('../login/login.html');
@@ -79,8 +78,7 @@ async function salvar() {
             preencherDados(usuarioAlterado);
             alert('Dados alterados com sucesso!');
         } else {
-            const erro = await response.json();
-            alert(erro.mensagem);
+            await mostrarErro(response);
         }
     } catch (error) {
         console.log(error);
